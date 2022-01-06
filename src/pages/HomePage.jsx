@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import Categories from '../components/home/Categories';
+import Collection from '../components/home/Collection';
+import FeaturedProducts from '../components/home/FeaturedProducts';
+import NewArrival from '../components/home/NewArrival';
 
 class HomePage extends Component {
   render() {
     return (
-      <div>
-        <h1>This is our home page</h1>
-      </div>
+      <Fragment>
+        <FeaturedProducts />
+        <Categories />
+        <Collection />
+        <NewArrival />
+      </Fragment>
     );
   }
 }
