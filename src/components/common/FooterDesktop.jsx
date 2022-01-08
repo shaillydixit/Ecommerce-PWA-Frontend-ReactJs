@@ -118,6 +118,7 @@ class FooterDesktop extends Component {
                   Privacy Policy
                 </Link>
                 <br></br>
+                <br></br>
                 <Link to="/refund" className="footer-link">
                   {' '}
                   Refund Policy{' '}
