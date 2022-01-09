@@ -9,10 +9,6 @@ class AppURL {
   }
 
   static ProductListByCategory(category) {
-    console.log(
-      'dekhoooo',
-      `${this.BaseURL}/productlistbycategory/${category}`
-    );
     return this.BaseURL + '/productlistbycategory/' + category;
   }
 
@@ -21,6 +17,8 @@ class AppURL {
       this.BaseURL + '/productlistbysubcategory/' + category + '/' + subcategory
     );
   }
+  static AllSlider = this.BaseURL + '/allslider';
+
 }
 
 export default AppURL;
