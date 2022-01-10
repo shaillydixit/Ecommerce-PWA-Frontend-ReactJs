@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import AppURL from '../../api/AppURL';
 import axios from 'axios';
 import NewArrivalLoading from '../PlaceHolder/NewArrivalLoading';
+import { Link } from 'react-router-dom';
 
 class NewArrival extends Component {
   constructor(props) {
@@ -44,31 +45,35 @@ class NewArrival extends Component {
       if (NewList.special_price == 'na') {
         return (
           <div>
-            <Card className="image-box card">
-              <img className="center" src={NewList.image} />
-              <Card.Body>
-                <p className="product-name-on-card">{NewList.title}</p>
-                <p className="product-price-on-card">
-                  Price : ${NewList.price}
-                </p>
-              </Card.Body>
-            </Card>
+            <Link className="text-link" to={'/productdetails/' + NewList.id}>
+              <Card className="image-box card">
+                <img className="center" src={NewList.image} />
+                <Card.Body>
+                  <p className="product-name-on-card">{NewList.title}</p>
+                  <p className="product-price-on-card">
+                    Price : ${NewList.price}
+                  </p>
+                </Card.Body>
+              </Card>
+            </Link>
           </div>
         );
       } else {
         return (
           <div>
-            <Card className="image-box card">
-              <img className="center" src={NewList.image} />
-              <Card.Body>
-                <p className="product-name-on-card">{NewList.title}</p>
-                <p className="product-price-on-card">
-                  Price :{' '}
-                  <strike className="text-secondary">${NewList.price}</strike> $
-                  {NewList.special_price}
-                </p>
-              </Card.Body>
-            </Card>
+            <Link className="text-link" to={'/productdetails/' + NewList.id}>
+              <Card className="image-box card">
+                <img className="center" src={NewList.image} />
+                <Card.Body>
+                  <p className="product-name-on-card">{NewList.title}</p>
+                  <p className="product-price-on-card">
+                    Price :{' '}
+                    <strike className="text-secondary">${NewList.price}</strike>{' '}
+                    ${NewList.special_price}
+                  </p>
+                </Card.Body>
+              </Card>
+            </Link>
           </div>
         );
       }
