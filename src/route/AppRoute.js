@@ -14,6 +14,10 @@ import AboutPage from '../pages/AboutPage';
 import ProductCategoryPage from '../pages/ProductCategoryPage';
 import ProductSubCategoryPage from '../pages/ProductSubCategoryPage';
 import SearchPage from '../pages/SearchPage';
+import RegisterPage from '../pages/RegisterPage';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
+import ForgetPasswordPage from '../pages/ForgetPasswordPage';
+import ProfilePage from '../pages/ProfilePage';
 
 class AppRoute extends Component {
   render() {
@@ -108,6 +112,34 @@ class AppRoute extends Component {
             exact
             path="/productbysearch/:searchkey"
             render={(props) => <SearchPage {...props} key={Date.now()} />}
+          />
+
+          <Route
+            exact
+            path="/register"
+            render={(props) => <RegisterPage {...props} key={Date.now()} />}
+          />
+
+          <Route
+            exact
+            path="/forget"
+            render={(props) => (
+              <ForgetPasswordPage {...props} key={Date.now()} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/reset/:id"
+            render={(props) => (
+              <ResetPasswordPage {...props} key={Date.now()} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/profile"
+            render={(props) => <ProfilePage {...props} key={Date.now()} />}
           />
         </Switch>
       </Fragment>
