@@ -129,6 +129,7 @@ class NavMenuDesktop extends Component {
               </Row>
               {this.searchRedirect()}
             </Container>
+            {this.searchRedirect()}
           </Navbar>
         </div>
         <div className={this.state.SideNavState}>

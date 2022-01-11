@@ -27,6 +27,7 @@ class SearchPage extends Component {
       })
       .catch((error) => {});
   }
+
   render() {
     return (
       <Fragment>
