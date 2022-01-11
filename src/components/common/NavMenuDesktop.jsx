@@ -24,11 +24,6 @@ class NavMenuDesktop extends Component {
     // alert(Searchkey);
     this.setState({ Searchkey: Searchkey });
   }
-  searchRedirect() {
-    if (this.state.SearchRedirectStauts === true) {
-      return <Redirect to={'/productbysearch/' + this.state.Searchkey} />;
-    }
-  }
 
   SeachOnClick() {
     if (this.state.Searchkey.length >= 2) {
@@ -36,6 +31,11 @@ class NavMenuDesktop extends Component {
     }
   }
 
+  searchRedirect() {
+    if (this.state.SearchRedirectStauts === true) {
+      return <Redirect to={'/productbysearch/' + this.state.Searchkey} />;
+    }
+  }
   MenuBarClickHandler = () => {
     this.SideNavOpenClose();
   };
@@ -118,12 +118,16 @@ class NavMenuDesktop extends Component {
                   <Link to="/login" className="h4 btn">
                     LOGIN
                   </Link>
+                  <Link to="/register" className="h4 btn">
+                    REGISTER
+                  </Link>
 
                   <Link to="/cart" className="cart-btn">
                     <i className="fa fa-shopping-cart"></i> 3 Items{' '}
                   </Link>
                 </Col>
               </Row>
+              {this.searchRedirect()}
             </Container>
             {this.searchRedirect()}
           </Navbar>

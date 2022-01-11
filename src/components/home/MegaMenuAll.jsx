@@ -50,7 +50,7 @@ class MegaMenuAll extends Component {
                   <li>
                     <Link
                       to={
-                        'productsubcategory/' +
+                        '/productsubcategory/' +
                         CatList.category_name +
                         '/' +
                         SubList.subcategory_name

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
