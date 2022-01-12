@@ -21,6 +21,7 @@ import RegisterPage from '../pages/RegisterPage';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
 import ForgetPasswordPage from '../pages/ForgetPasswordPage';
 import ProfilePage from '../pages/ProfilePage';
+import OrderListPage from '../pages/OrderListPage';
 
 class AppRoute extends Component {
   constructor() {
@@ -197,6 +198,17 @@ class AppRoute extends Component {
             exact
             path="/productbysearch/:searchkey"
             render={(props) => <SearchPage {...props} key={Date.now()} />}
+          />
+          <Route
+            exact
+            path="/orderlist"
+            render={(props) => (
+              <OrderListPage
+                user={this.state.user}
+                {...props}
+                key={Date.now()}
+              />
+            )}
           />
         </Switch>
       </Fragment>
