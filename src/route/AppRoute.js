@@ -143,7 +143,11 @@ class AppRoute extends Component {
             exact
             path="/productdetails/:code"
             render={(props) => (
-              <ProductDetailsPage {...props} key={Date.now()} />
+              <ProductDetailsPage
+                user={this.state.user}
+                {...props}
+                key={Date.now()}
+              />
             )}
           />
 
