@@ -14,11 +14,39 @@ import AboutPage from '../pages/AboutPage';
 import ProductCategoryPage from '../pages/ProductCategoryPage';
 import ProductSubCategoryPage from '../pages/ProductSubCategoryPage';
 import SearchPage from '../pages/SearchPage';
+import AppURL from '../api/AppURL';
+import axios from 'axios';
+import NavMenuDesktop from '../components/common/NavMenuDesktop';
+import RegisterPage from '../pages/RegisterPage';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
+import ForgetPasswordPage from '../pages/ForgetPasswordPage';
+import ProfilePage from '../pages/ProfilePage';
 
 class AppRoute extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: {},
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get(AppURL.UserData)
+      .then((response) => {
+        this.setUser(response.data);
+      })
+      .catch((error) => {});
+  }
+
+  setUser = (user) => {
+    this.setState({ user: user });
+  };
+
   render() {
     return (
       <Fragment>
+        <NavMenuDesktop user={this.state.user} setUser={this.setUser} />
         <Switch>
           <Route
             exact
@@ -29,7 +57,56 @@ class AppRoute extends Component {
           <Route
             exact
             path="/login"
-            render={(props) => <UserLoginPage {...props} key={Date.now()} />}
+            render={(props) => (
+              <UserLoginPage
+                user={this.state.user}
+                setUser={this.setUser}
+                {...props}
+                key={Date.now()}
+              />
+            )}
+          />
+
+          <Route
+            exact
+            path="/register"
+            render={(props) => (
+              <RegisterPage
+                user={this.state.user}
+                setUser={this.setUser}
+                {...props}
+                key={Date.now()}
+              />
+            )}
+          />
+
+          <Route
+            exact
+            path="/forget"
+            render={(props) => (
+              <ForgetPasswordPage {...props} key={Date.now()} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/reset/:id"
+            render={(props) => (
+              <ResetPasswordPage {...props} key={Date.now()} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/profile"
+            render={(props) => (
+              <ProfilePage
+                user={this.state.user}
+                setUser={this.setUser}
+                {...props}
+                key={Date.now()}
+              />
+            )}
           />
 
           <Route
