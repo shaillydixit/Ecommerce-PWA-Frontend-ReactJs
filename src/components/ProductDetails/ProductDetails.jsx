@@ -26,6 +26,8 @@ class ProductDetails extends Component {
       addToCart: 'Add To Cart',
       PageRefreshStatus: false,
       addToFav: 'Favourite',
+      OrderNow: 'Order Now',
+      PageRedirectStauts: false,
     };
   }
 
@@ -85,6 +87,64 @@ class ProductDetails extends Component {
           this.setState({ addToCart: 'Add To Cart' });
         });
     }
+  }; /// End addToCart Mehtod
+  orderNow = () => {
+    let isSize = this.state.isSize;
+    let isColor = this.state.isColor;
+    let color = this.state.color;
+    let size = this.state.size;
+    let quantity = this.state.quantity;
+    let productCode = this.state.productCode;
+    let email = this.props.user.email;
+
+    if (isColor === 'YES' && color.length === 0) {
+      cogoToast.error('Please Select Color', { position: 'top-right' });
+    } else if (isSize === 'YES' && size.length === 0) {
+      cogoToast.error('Please Select Size', { position: 'top-right' });
+    } else if (quantity.length === 0) {
+      cogoToast.error('Please Select Quantity', { position: 'top-right' });
+    } else if (!localStorage.getItem('token')) {
+      cogoToast.warn('Please You have to Login First', {
+        position: 'top-right',
+      });
+    } else {
+      this.setState({ addToCart: 'Adding...' });
+      let MyFormData = new FormData();
+      MyFormData.append('color', color);
+      MyFormData.append('size', size);
+      MyFormData.append('quantity', quantity);
+      MyFormData.append('product_code', productCode);
+      MyFormData.append('email', email);
+
+      axios
+        .post(AppURL.addToCart, MyFormData)
+        .then((response) => {
+          if (response.data === 1) {
+            cogoToast.success('Product Added Successfully', {
+              position: 'top-right',
+            });
+            this.setState({ OrderNow: 'Order Now' });
+            this.setState({ PageRedirectStauts: true });
+          } else {
+            cogoToast.error('Your Request is not done ! Try Aagain', {
+              position: 'top-right',
+            });
+            this.setState({ addToCart: 'Add To Cart' });
+          }
+        })
+        .catch((error) => {
+          cogoToast.error('Your Request is not done ! Try Aagain', {
+            position: 'top-right',
+          });
+          this.setState({ addToCart: 'Add To Cart' });
+        });
+    }
+  }; /// End orderNow Mehtod
+
+  PageRedirect = () => {
+    if (this.state.PageRedirectStauts === true) {
+      return <Redirect to="/cart" />;
+    }
   };
 
   addToFav = () => {
@@ -120,6 +180,7 @@ class ProductDetails extends Component {
         });
     }
   }; // end ADD TO FAV
+
   colorOnChange = (event) => {
     let color = event.target.value;
     // alert(color);
@@ -390,10 +451,14 @@ class ProductDetails extends Component {
                       {this.state.addToCart}{' '}
                     </button>
 
-                    <button className="btn btn-primary m-1">
+                    <button
+                      onClick={this.orderNow}
+                      className="btn btn-primary m-1"
+                    >
                       {' '}
-                      <i className="fa fa-car"></i> Order Now
+                      <i className="fa fa-car"></i> {this.state.OrderNow}{' '}
                     </button>
+
                     <button
                       onClick={this.addToFav}
                       className="btn btn-primary m-1"
@@ -412,7 +477,7 @@ class ProductDetails extends Component {
                 </Col>
 
                 <Col className="" md={6} lg={6} sm={12} xs={12}>
-                  <ReviewList code={product_id} />
+                  <ReviewList code={product_code} />{' '}
                 </Col>
               </Row>
             </Col>
@@ -422,6 +487,7 @@ class ProductDetails extends Component {
         <SuggestedProduct subcategory={subcategory} />
 
         {this.PageRefresh()}
+        {this.PageRedirect()}
       </Fragment>
     );
   }
