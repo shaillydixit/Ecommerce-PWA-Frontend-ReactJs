@@ -236,18 +236,16 @@ class ProductDetails extends Component {
     let special_price = ProductAllData['productList'][0]['special_price'];
     let star = ProductAllData['productList'][0]['star'];
 
-    let image_one = ProductAllData['productDetails'][0]['image_one'];
-    let image_two = ProductAllData['productDetails'][0]['image_two'];
-    let image_three = ProductAllData['productDetails'][0]['image_three'];
-    let image_four = ProductAllData['productDetails'][0]['image_four'];
-    let color = ProductAllData['productDetails'][0]['color'];
-    let size = ProductAllData['productDetails'][0]['size'];
+    let image_one = ProductAllData['productList'][0]['image_one'];
+    let image_two = ProductAllData['productList'][0]['image_two'];
+    let image_three = ProductAllData['productList'][0]['image_three'];
+    let image_four = ProductAllData['productList'][0]['image_four'];
+    let color = ProductAllData['productList'][0]['color'];
+    let size = ProductAllData['productList'][0]['size'];
 
-    let product_id = ProductAllData['productDetails'][0]['product_id'];
     let short_description =
-      ProductAllData['productDetails'][0]['short_description'];
-    let long_description =
-      ProductAllData['productDetails'][0]['long_description'];
+      ProductAllData['productList'][0]['short_description'];
+    let long_description = ProductAllData['productList'][0]['long_description'];
 
     var ColorDiv = 'd-none';
     if (color != 'na') {
@@ -321,7 +319,7 @@ class ProductDetails extends Component {
 
               <Breadcrumb.Item>
                 {' '}
-                <Link to={'/productdetails/' + product_id}> {title} </Link>{' '}
+                <Link to={'/productdetails/'}> {title} </Link>{' '}
               </Breadcrumb.Item>
             </Breadcrumb>
           </div>
@@ -344,7 +342,7 @@ class ProductDetails extends Component {
                     zoomSrc={this.state.previewImg}
                   />
 
-                  <Container className="my-3">
+                  <Container className="my-3 sp">
                     <Row>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
                         <img
